@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initToolBar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.app_name);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
