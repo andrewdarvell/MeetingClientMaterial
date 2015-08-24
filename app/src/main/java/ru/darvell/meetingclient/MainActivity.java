@@ -1,15 +1,18 @@
 package ru.darvell.meetingclient;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private View coordinator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initToolBar();
+
+        coordinator = findViewById(R.id.coordinator_main);
+        initFAB();
     }
 
     @Override
@@ -52,5 +58,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         toolbar.inflateMenu(R.menu.menu);
+    }
+
+    private void initFAB(){
+        findViewById(R.id.fab_add).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Snackbar.make(coordinator, "Test Test", Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 }
