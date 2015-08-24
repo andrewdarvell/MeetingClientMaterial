@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        toolbar.inflateMenu(R.menu.menu);
+
     }
 
     private void initFAB(){
