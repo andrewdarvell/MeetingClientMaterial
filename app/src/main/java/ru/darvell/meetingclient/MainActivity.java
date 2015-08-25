@@ -1,18 +1,26 @@
 package ru.darvell.meetingclient;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import ru.darvell.meetingclient.fragments.SchedulesFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    final static int SCHEDULES_FRGMT = 1;
+
     private Toolbar toolbar;
-    private View coordinator;
+
+    FragmentTransaction fTras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initToolBar();
-
-        coordinator = findViewById(R.id.coordinator_main);
-        initFAB();
+        changeFragment(SCHEDULES_FRGMT);
     }
 
     @Override
@@ -57,17 +63,25 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
-    private void initFAB(){
-        findViewById(R.id.fab_add).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Snackbar.make(coordinator, "Test Test", Snackbar.LENGTH_SHORT).show();
-                    }
-                }
-        );
+    private void changeFragment(int frgmntType){
+        Class fragmentClass = null;
+        Fragment fragment = null;
+        switch (frgmntType){
+            case SCHEDULES_FRGMT:fragmentClass = SchedulesFragment.class;
+                break;
+        }
+        try{
+            fragment = (Fragment) fragmentClass.newInstance();
+        }catch (Exception e){
+            Log.e("Main", e.toString());
+        }
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.frgmCont, fragment);
+        ft.commit();
     }
+
+
 }

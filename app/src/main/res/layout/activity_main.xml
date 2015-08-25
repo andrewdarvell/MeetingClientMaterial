@@ -8,32 +8,22 @@
     android:background="@color/mainBackground"
     tools:context=".MainActivity">
 
-
-
-    <android.support.design.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:id="@+id/coordinator_main">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar">
+            layout="@layout/toolbar"/>
 
-        </include>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frgmCont"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:src="@mipmap/ic_plus_white_24dp"
-            app:elevation="6dp"
-            android:layout_margin="16dp"
-            app:backgroundTint="@color/ColorPrimary"/>
+    </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
-
-            <!-- your content layout -->
     <android.support.design.widget.NavigationView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
