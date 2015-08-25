@@ -3,6 +3,8 @@ package ru.darvell.meetingclient;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +16,14 @@ import android.support.v7.widget.Toolbar;
 import ru.darvell.meetingclient.fragments.SchedulesFragment;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     final static int SCHEDULES_FRGMT = 1;
 
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         changeFragment(SCHEDULES_FRGMT);
     }
@@ -89,5 +95,9 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
